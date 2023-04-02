@@ -23,4 +23,15 @@ public class Arc {
         return valuation;
     }
 
+    public boolean equalsNoeud(String noeud) {
+        return this.noeudSrc.equals(noeud) || this.noeudDest.equals(noeud);
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(noeudSrc).append("-").append(noeudDest).append("(").append(valuation).append(")");
+        return sb.toString();
+    }
+
+
 }

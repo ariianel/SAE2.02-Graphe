@@ -1,15 +1,12 @@
 package com.GraphesOrientesValues;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GrapheLArcs implements IGraphe  {
-    private ArrayList<Arc> arcs;
-    private ArrayList<String>sommets;
+    private List<Arc> arcs;
     public GrapheLArcs(){
         arcs = new ArrayList<>();
-        sommets = new ArrayList<>();
     }
     public GrapheLArcs(String graphe){
         this();
@@ -17,26 +14,32 @@ public class GrapheLArcs implements IGraphe  {
     }
 
     /**
-     * Vérifie si le graphe contient un sommet donné.
+     * Vérifie si le graphe contient le sommet donné en argument de la fonction
      *
-     * @param sommet le sommet à rechercher dans le graphe.
+     * @param sommet le nom du sommet-noeud à chercher dans le graphe
      * @return true si le graphe contient le sommet, false sinon.
      */
     @Override
     public boolean contientSommet(String sommet) {
-        return sommets.contains(sommet);
+        for(Arc arc : arcs){
+            if(arc.equalsNoeud(sommet)){
+                return true;
+            }
+        }
+        return false;
     }
     /**
-     * Ajoute un sommet au graphe s'il n'est pas déjà présent.
+     * On ajoute un sommet à la liste d'arc si jamais il n'existe pas déjà
      *
      * @param noeud le nom du sommet à ajouter.
      */
     @Override
     public void ajouterSommet(String noeud){
         if(!contientSommet(noeud)){
-            sommets.add(noeud);
+            arcs.add(new Arc(noeud, "", 0));
         }
     }
+
     /**
      * Ajoute un arc entre deux sommets du graphe, avec une valuation donnée.
      * Si les sommets ne sont pas déjà présents dans le graphe, ils sont ajoutés.
@@ -46,39 +49,75 @@ public class GrapheLArcs implements IGraphe  {
      * @param valeur la valuation de l'arc.
      */
     @Override
-    public void ajouterArc(String source, String destination, Integer valeur){
-        if(!contientSommet(source) && !contientSommet(destination)) {
-            sommets.add(source);
-            sommets.add(destination);
+    public void ajouterArc(String source, String destination, Integer valeur) {
+        //Si valuation inférieure à zéro
+        if (valeur < 0) {
+            throw new IllegalArgumentException();
         }
+        if(contientArc(source, destination)){
+            throw new IllegalArgumentException();
+        }
+        ajouterSommet(source);
+        ajouterSommet(destination);
         arcs.add(new Arc(source, destination, valeur));
+        //Trie les sommets en trop
+        trierSommets();
+    }
+    /**
+     * Permet de savoir si les sommets de notre liste d'arcs ont des arcs qui les composent
+     */
+    public void trierSommets() {
+        Set<String> sommetsRelies = new HashSet<>();
+        for (Arc arc : arcs) {
+            sommetsRelies.add(arc.getNoeudSource());
+            sommetsRelies.add(arc.getNoeudDest());
+        }
+        List<Arc> tmp = new ArrayList<>();
+        for (Arc arc : arcs) {
+            if (sommetsRelies.contains(arc.getNoeudSource()) && sommetsRelies.contains(arc.getNoeudDest())) {
+                tmp.add(arc);
+            }
+        }
+        arcs = tmp;
+
     }
 
     /**
-     * Retourne une liste contenant tous les sommets du graphe.
+     * Retourne une liste qui contient tous les sommets du graphe
      *
      * @return une nouvelle liste contenant tous les sommets du graphe.
      */
     @Override
     public List<String> getSommets() {
-        //On retourne une nouvelle liste qui contient tous les sommets car elle est en private
-        return new ArrayList<>(sommets);
+        List<String> sommets = new ArrayList<>();
+        for (Arc arc : arcs) {
+            //Vérification de l'existence du sommet
+            if (!sommets.contains(arc.getNoeudSource())) {
+                sommets.add(arc.getNoeudSource());
+            }
+            if (!sommets.contains(arc.getNoeudDest())) {
+                sommets.add(arc.getNoeudDest());
+            }
+        }
+        sommets.remove("");
+        Collections.sort(sommets);
+        return sommets;
+
     }
 
     /**
-     * Supprime le sommet donné ainsi que tous les arcs associés à ce sommet.
+     * Supprime le sommet donné ainsi que tous les arcs qui sont associés à ce sommet.
      *
-     * @param noeud le sommet à supprimer du graphe.
+     * @param noeud c'est le sommet à supprimer du graphe.
      */
     @Override
     public void oterSommet(String noeud){
+
         if(contientSommet(noeud)){
             //On parcourt les arcs pour supprimer tous les arcs qui ont le noeud en source ou destination
-            for (int i=0; i<arcs.size();++i){
-                Arc arc = arcs.get(i);
-                if(arc.getNoeudSource().equals(noeud) || arc.getNoeudDest().equals(noeud)){
+            for(Arc arc : arcs){
+                if(arc.equalsNoeud(noeud)){
                     arcs.remove(arc);
-                    sommets.remove(noeud);
                 }
             }
         }
@@ -92,6 +131,9 @@ public class GrapheLArcs implements IGraphe  {
      */
     @Override
     public void oterArc(String source, String destination){
+        if(!contientArc(source, destination)){
+            throw new IllegalArgumentException();
+        }
         for(int i =0; i<arcs.size();++i){
             if(arcs.get(i).equals(source) && arcs.get(i).equals(destination)){
                 arcs.remove(i);
@@ -112,6 +154,7 @@ public class GrapheLArcs implements IGraphe  {
             if (arc.getNoeudSource().equals(sommet)) {
                 successeurs.add(arc.getNoeudDest());
             }
+        successeurs.remove("");
         return successeurs;
     }
 
