@@ -12,13 +12,35 @@ public class GrapheMAdj implements IGraphe{
 	
 	public GrapheMAdj() {
 		indices = new HashMap<>();
-		matrice = new int[3][3];
-	}
-	public static void main(String[] args) {
-		GrapheMAdj g = new GrapheMAdj();
-		System.out.println(g.matrice[0][0]);
 	}
 	
+	public GrapheMAdj(String graphe) {
+		this();
+		int taillematrice = taille(graphe);
+		matrice = new int[taillematrice][taillematrice];
+	}
+	
+	private int taille(String graphe) {
+	    assert this.getSommets().isEmpty();
+	    Map<String, Integer> sommets = new HashMap<>();
+	    String[] arcs = graphe.split(",\\s*");
+	    for (String arc : arcs) {
+	        String[] elements = arc.trim().split("-");
+	        String src = elements[0].replaceAll(":", "");
+	        if (!sommets.containsKey(src))
+	        	sommets.put(src,sommets.size());
+	        if (elements.length > 1 && !elements[1].isEmpty()) {
+	            String[] targets = elements[1].split(",\\s*");
+	            for (String target : targets) {
+	                String dest = target.substring(0, target.indexOf('('));
+	                if (!sommets.containsKey(dest))
+	    	        	sommets.put(dest,sommets.size());
+	            }
+	        }
+	    }
+		return sommets.size();
+	}
+
 	@Override
 	public void ajouterSommet(String noeud) {
 		if(!contientSommet(noeud))
