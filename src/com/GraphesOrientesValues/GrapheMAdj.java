@@ -18,6 +18,7 @@ public class GrapheMAdj implements IGraphe{
 		this();
 		int taillematrice = taille(graphe);
 		matrice = new int[taillematrice][taillematrice];
+		peupler(graphe);
 	}
 	
 	private int taille(String graphe) {
