@@ -59,7 +59,6 @@ public class GrapheMAdj implements IGraphe{
         ajouterSommet(source);
         ajouterSommet(destination);
         matrice[indices.get(source)][indices.get(destination)]=valeur;
-        trierSommets();
 	}
 	
 	@Override
@@ -115,11 +114,7 @@ public class GrapheMAdj implements IGraphe{
 			return true;
 		return false;		
 	}
-	
-	//plus
-	public void trierSommets() {
-	}
-	
+
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Entry<String, Integer> e : indices.entrySet()) {
