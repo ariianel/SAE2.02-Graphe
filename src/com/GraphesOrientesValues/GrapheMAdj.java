@@ -121,6 +121,21 @@ public class GrapheMAdj implements IGraphe{
 	}
 	
 	public String toString() {
-		return null;
+		StringBuilder sb = new StringBuilder();
+		for (Entry<String, Integer> e : indices.entrySet()) {
+			List<String> successeurs = getSucc(e.getKey());
+			sb.append(e.getKey());
+			if (!successeurs.isEmpty()) {
+				for (String succ : successeurs) {
+					int v = getValuation(e.getKey(),succ);
+					sb.append("-").append(succ);
+					sb.append("(").append(v).append(")");
+					sb.append(", ");
+				}
+			}else {
+				sb.append(":").append(", ");
+			}
+		}
+		return sb.substring(0, sb.length()-2);
 	}
 }
