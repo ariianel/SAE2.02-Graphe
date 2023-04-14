@@ -26,9 +26,16 @@ class IGrapheTest {
 	
 	@Test
 	void exo3_1Maths() {
-		//GrapheLArcs gla = new GrapheLArcs(g31);
-		GrapheMAdj gla = new GrapheMAdj(g31);
+		//liste d'arc
+		GrapheLArcs gla = new GrapheLArcs(g31);
+		//Hachage
+		GrapheHHAdj glh = new GrapheHHAdj(g31);
+		//matrice adj
+		GrapheMAdj gma = new GrapheMAdj(g31);
+		//tests
 		tester3_1(gla);
+		tester3_1(glh);
+		tester3_1(gma);
 	}
 	
 	void tester3_1(IGraphe g) {
@@ -59,11 +66,11 @@ class IGrapheTest {
 				() -> g.ajouterArc("A", "B", -1)); // valuation negative
 	}
 	
-	/*@Test
+	@Test
 	void importer() throws NumberFormatException, FileNotFoundException {
 		System.out.println("SAE graphes");
 		IGraphe g = new GrapheLArcs();
-		Arc a = GraphImporter.importer("/Users/ariane/IdeaProjects/GraphesOrientesValues/src/com/GraphesOrientesValues/graphes/ac/g-10-1.txt", g);
+		Arc a = GraphImporter.importer("src/com/GraphesOrientesValues/graphes/ac/g-10-1.txt", g);
 		assertEquals(g.toString(), "1-3(5), "
 				+ "10-3(3), 2-1(5), 2-3(5), 2-5(4), "
 				+ "3-4(4), 3-5(4), 4-10(1), 4-2(1), 4-7(3), "
@@ -71,6 +78,7 @@ class IGrapheTest {
 				+ " 8-2(4), 8-6(1), 9-2(4)");
 		assertEquals("5", a.getNoeudSource());
 		assertEquals("7", a.getNoeudDest());
-	}*/
+	}
 
 }
+
