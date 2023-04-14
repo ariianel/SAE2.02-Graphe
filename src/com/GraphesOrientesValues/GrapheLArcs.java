@@ -1,6 +1,6 @@
 package com.GraphesOrientesValues;
 
-//import java.lang.reflect.Array;
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class GrapheLArcs implements IGraphe  {
@@ -192,20 +192,19 @@ public class GrapheLArcs implements IGraphe  {
     }
 
     /**
-
-     Retourne une chaîne de caractères représentant le graphe sous forme de liste d'adjacence.
-     Les sommets sont représentés par leur nom et les arcs sont représentés par une flèche reliant le sommet source
-     au sommet destination, suivie de la valuation de l'arc entre parenthèses. Les sommets qui n'ont pas de successeurs
-     sont représentés seuls sur leur ligne.
+     Retourne une chaîne de caractères représentant le graphe sous forme de liste
      (ex: "A-B(3), C-D(1), E-F(2)").
      @return une chaîne de caractères représentant le graphe sous forme de liste d'adjacence.
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
-
-        for (String noeud : getSommets()) {
+        List<String> sommets = new ArrayList<>();
+        sommets = getSommets();
+        Collections.sort(sommets);
+        for (String noeud : sommets) {
 
             List<String> successeurs = getSucc(noeud);
+            Collections.sort(successeurs);
             if (!successeurs.isEmpty()) {
                 for (String succ : successeurs) {
                     int valuation = getValuation(noeud, succ);
