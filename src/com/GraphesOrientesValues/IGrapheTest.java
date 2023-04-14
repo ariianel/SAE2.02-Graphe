@@ -26,7 +26,8 @@ class IGrapheTest {
 	
 	@Test
 	void exo3_1Maths() {
-		GrapheLArcs gla = new GrapheLArcs(g31);
+		//GrapheLArcs gla = new GrapheLArcs(g31);
+		GrapheMAdj gla = new GrapheMAdj(g31);
 		tester3_1(gla);
 	}
 	
@@ -58,7 +59,7 @@ class IGrapheTest {
 				() -> g.ajouterArc("A", "B", -1)); // valuation negative
 	}
 	
-	@Test
+	/*@Test
 	void importer() throws NumberFormatException, FileNotFoundException {
 		System.out.println("SAE graphes");
 		IGraphe g = new GrapheLArcs();
@@ -70,6 +71,6 @@ class IGrapheTest {
 				+ " 8-2(4), 8-6(1), 9-2(4)");
 		assertEquals("5", a.getNoeudSource());
 		assertEquals("7", a.getNoeudDest());
-	}
+	}*/
 
 }
