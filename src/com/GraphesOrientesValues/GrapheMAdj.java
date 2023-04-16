@@ -171,8 +171,9 @@ public class GrapheMAdj implements IGraphe{
 		}
 		
 	}
+	
+	public String toString() {
+        	return toAString();
+    	}
 
-    public String toString() {
-        return toAString();
-    }
 }
