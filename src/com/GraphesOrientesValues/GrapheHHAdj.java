@@ -201,34 +201,11 @@ public class GrapheHHAdj implements IGraphe{
 
     /**
      Retourne une chaîne de caractères représentant le graphe sous forme de liste d'adjacence.
-     Les sommets sont représentés par leur nom et les arcs sont représentés par une flèche reliant le sommet source
-     au sommet destination, suivie de la valuation de l'arc entre parenthèses. Les sommets qui n'ont pas de successeurs
-     sont représentés seuls sur leur ligne.
      (ex: "A-B(3), C-D(1), E-F(2)").
      @return une chaîne de caractères représentant le graphe sous forme de liste d'adjacence.
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        List<String> sommets = new ArrayList<>();
-        sommets = getSommets();
-        Collections.sort(sommets); //tri des sommets par ordre lexicographique ex: [1,10,2,3]
-        for (String noeud : sommets) {
-            List<String> successeurs = getSucc(noeud);
-            Collections.sort(successeurs);
-            if (!successeurs.isEmpty()) {
-                for (String succ : successeurs) {
-                    int valuation = getValuation(noeud, succ);
-                    sb.append(noeud).append("-");
-                    sb.append(succ).append("(").append(valuation).append(")");
-                    sb.append(", ");
-                }
-            }else{
-                sb.append(noeud);
-                sb.append(":");
-                sb.append(", ");
-            }
-        }
-        return sb.substring(0, sb.length()-2);//Permet de retirer les deux derniers caractères de la chaîne sb
+        return toAString();
     }
 }
 
