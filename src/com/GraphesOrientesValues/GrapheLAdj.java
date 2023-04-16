@@ -109,29 +109,6 @@ public class GrapheLAdj implements IGraphe {
     }
 
     public String toString() {
-
-        StringBuilder sb = new StringBuilder();
-        List<String> sommets = new ArrayList<>();
-        sommets = getSommets();
-        Collections.sort(sommets);
-
-        for (String noeud : sommets) {
-
-            List<String> successeurs = getSucc(noeud);
-            Collections.sort(successeurs);
-            if (!successeurs.isEmpty()) {
-                for (String succ : successeurs) {
-                    int valuation = getValuation(noeud, succ);
-                    sb.append(noeud).append("-");
-                    sb.append(succ).append("(").append(valuation).append(")");
-                    sb.append(", ");
-                }
-            } else {
-                sb.append(noeud);
-                sb.append(":");
-                sb.append(", ");
-            }
-        }
-        return sb.substring(0, sb.length() - 2);//Permet de retirer les deux derniers caractères de la chaîne sb
+        return toAString();
     }
 }
