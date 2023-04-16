@@ -172,23 +172,7 @@ public class GrapheMAdj implements IGraphe{
 		
 	}
 
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (Entry<String, Integer> e : indices.entrySet()) {
-			List<String> successeurs = getSucc(e.getKey());
-			if (!successeurs.isEmpty()) {
-				for (String succ : successeurs) {
-					sb.append(e.getKey());
-					int v = getValuation(e.getKey(),succ);
-					sb.append("-").append(succ);
-					sb.append("(").append(v).append(")");
-					sb.append(", ");
-				}
-			}else {
-				sb.append(e.getKey());
-				sb.append(":").append(", ");
-			}
-		}
-		return sb.substring(0, sb.length()-2);
-	}
+    public String toString() {
+        return toAString();
+    }
 }
