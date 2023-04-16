@@ -32,10 +32,13 @@ class IGrapheTest {
 		GrapheHHAdj glh = new GrapheHHAdj(g31);
 		//matrice adj
 		GrapheMAdj gma = new GrapheMAdj(g31);
+		//Liste d'adjacence
+		GrapheLAdj glad = new GrapheLAdj(g31); 
 		//tests
 		tester3_1(gla);
 		tester3_1(glh);
 		tester3_1(gma);
+		tester3_1(glad);
 	}
 	
 	void tester3_1(IGraphe g) {
