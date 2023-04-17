@@ -25,7 +25,7 @@ public class GrapheMAdj implements IGraphe{
 		//affiche(taillematrice, matrice);
 		//System.out.println("Avant");
 		peupler(graphe);
-		affiche(indices.size(),matrice);
+		//affiche(matrice.length,matrice);
 		//System.out.println("Après");
 	}
 	public void affiche(int taille ,int[][] m) {
@@ -38,13 +38,14 @@ public class GrapheMAdj implements IGraphe{
 			System.out.print(e.getKey()+e.getValue()+" ");
 		}
 	}
-	
+	/*
 	private void initialisation(int taille, int[][] m) {
 		for(int i=0;i<taille;++i)
 			for(int j=0;j<taille;++j)
 				m[i][j] = cst;			
 	}
-	
+	*/
+	/*
 	private int taille(String graphe, Map<String, Integer> som) {
 	    //assert this.getSommets().isEmpty();
 	    String[] arcs = graphe.split(",\\s*");
@@ -65,24 +66,25 @@ public class GrapheMAdj implements IGraphe{
 	    }
 		return som.size();
 	}
+	*/
 
 	@Override
 	public void ajouterSommet(String noeud) {
 		if(!contientSommet(noeud)) {
-			indices.put(noeud, indices.size());
+			indices.put(noeud, matrice.length);
 			redimenssion();
 		}
 	}
 	
 	private void redimenssion() {
-		int t = indices.size();
+		int t = matrice.length +1;
 		int[][] matrice2 = new int[t][t];
 		for (int i=0;i<t;++i)
 			for (int j=0;j<t;++j) {
 				if (i<t-1 && j < t-1)
 					matrice2[i][j] = matrice[i][j];
 				else
-					matrice2[i][j] = -1;
+					matrice2[i][j] = cst;
 			}
 		matrice = matrice2;		
 	}
@@ -104,7 +106,7 @@ public class GrapheMAdj implements IGraphe{
 	public void oterSommet(String noeud) {
 		if (indices.containsKey(noeud)) {
 			int inoeud = indices.get(noeud);
-			System.out.println(noeud+" "+inoeud);
+			//System.out.println(noeud+" "+inoeud);
 			for (Entry<String, Integer> e : indices.entrySet()) {
 				if(matrice[inoeud][e.getValue()] > cst)
 					oterArc(noeud,e.getKey());
@@ -173,7 +175,6 @@ public class GrapheMAdj implements IGraphe{
 	}
 	
 	public String toString() {
-        	return toAString();
-    	}
-
+    	return toAString();
+	}
 }
