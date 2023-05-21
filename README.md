@@ -14,7 +14,17 @@
 <h1 align="center">Est-ce que Dijkstra passe les tests fournis sur Moodle avec tous les graphes fournis ? Jusqu’à quelle taille (selon le type1 de graphe).</h1>
      <p align="center"><i>R : Oui, Dijkstra passe les tests fournis avec tous les types de graphes(DorogvtsevMendes, Barabasi, et fullconnected).<i></p><br>
 
+X = Trop long pour obtenir un résultat
+
 **Taille maximale pour:**
 - DorogvtsevMendes : 1 000 000
+          GrapheLArcs: X
+          GrapheLAdj : 1267 millisecondes
+          GrapheMAdj : X
+          GrapheHHAdj : 1479 millisecondes
 - Barabasi : 100 000
+          GrapheHHAdj : 3561651 millisecondes
 - fullconnected : 5000
+          GrapheLArc : X
+          GrapheLAdj : 33325 millisecondes
+          GrapheMAdj : 878 millisecondes GrapheHHAdj : 1599 millisecondes
