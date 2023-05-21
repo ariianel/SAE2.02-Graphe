@@ -12,7 +12,9 @@
 <p align="center"><i>R : Les 4 classes ont été implémentées : GrapheHHAdj, GrapheLAdj, GrapheLArcs, GrapheMAdj<i></p><br>
           
 <h1 align="center">Est-ce que Dijkstra passe les tests fournis sur Moodle avec tous les graphes fournis ? Jusqu’à quelle taille (selon le type1 de graphe).</h1>
-     <p align="center"><i>R : Oui, Dijkstra passe les tests fournis avec tous les types de graphes(DorogvtsevMendes, Barabasi, et fullconnected), jusqu'à la taille maximale de :<i></p><br>
+     <p align="center"><i>R : Oui, Dijkstra passe les tests fournis avec tous les types de graphes(DorogvtsevMendes, Barabasi, et fullconnected).<i></p><br>
+
+**Taille maximale pour:**
 - DorogvtsevMendes : 1 000 000
 - Barabasi : 
 - fullconnected : 
