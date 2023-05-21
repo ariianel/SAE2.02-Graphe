@@ -16,5 +16,5 @@
 
 **Taille maximale pour:**
 - DorogvtsevMendes : 1 000 000
-- Barabasi : 
-- fullconnected : 
+- Barabasi : 100 000
+- fullconnected : 5000
